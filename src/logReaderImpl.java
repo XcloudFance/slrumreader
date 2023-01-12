@@ -4,10 +4,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class logReaderImpl implements logReader{
-
+    ArrayList<String> logContent = new ArrayList<String>();
+    int line = 0;
     private String formatTime(String time){
         time = time.substring(1, time.length()-1);
         String res  = time.replace("T", " ");
@@ -20,12 +22,10 @@ public class logReaderImpl implements logReader{
         try{
             reader = new BufferedReader(new FileReader(file));
             String tmp = null;
-            int line = 1;
+            
             while ((tmp = reader.readLine()) != null){
                 //System.out.println(tmp);
-                String[] seq = tmp.split(" ");
-                this.dataToStamp(formatTime(seq[0]));
-
+                logContent.add(tmp);
                 line ++;
             }
             reader.close();
@@ -71,5 +71,26 @@ public class logReaderImpl implements logReader{
     
     public void finalize(){
 
+    }
+
+    public int[] detectInTimeRange(long start, long end) throws ParseException{
+        int created = 0;
+        int ended = 0;
+        for(int i = 0; i < line; i++){
+            String[] analysis = logContent.get(i).split(" ");
+            long thisTime = this.dataToStamp(this.formatTime(analysis[0]));
+            
+            if (this.ifInRange(start, end, thisTime)){
+                System.out.println(analysis[1]);
+                if (analysis[1].equals("_job_complete:")){
+                    ended ++;
+                }
+                if (analysis[1].equals("sched:")){
+                    created ++;
+                }
+            }
+        }
+        return new int[]{created,ended};
+ 
     }
 }
