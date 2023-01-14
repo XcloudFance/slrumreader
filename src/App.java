@@ -11,7 +11,7 @@ public class App {
         System.out.println(log.detectInTimeRange(start,end)[1]);
         
         log.load();
-        System.out.println(log.getAverageTimeOfJob());
+        System.out.println(log.getAverageTimeOfJob().getTime()/ 1000 / 60);
         //TableViewSample tvs = new TableViewSample();
         //TableViewSample.main();
         

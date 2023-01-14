@@ -8,7 +8,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.math;
+import java.util.Date;
+
 
 public class logReaderImpl implements logReader {
     ArrayList<String> logContent = new ArrayList<String>();
@@ -45,7 +46,7 @@ public class logReaderImpl implements logReader {
             }
         }
 
-        
+        this.load();
     }   
 
     @Override
@@ -65,9 +66,9 @@ public class logReaderImpl implements logReader {
     }
 
     @Override
-    public String stampToData(long timeStamp){
-        SimpleDateFormat sdf = new SimpleDateFormat("ss");
-        return sdf.format(new Date(Long.parseLong(String.valueOf(timeStamp) ) ));
+    public Date stampToData(long timeStamp){
+        //SimpleDateFormat sdf = new SimpleDateFormat("hh-mm-ss");
+        return new Date(Long.parseLong(String.valueOf(timeStamp)) );
 
     }
     @Override
@@ -145,16 +146,23 @@ public class logReaderImpl implements logReader {
         }
         return 0;
     }
-    public String getAverageTimeOfJob(){
+    public Date getAverageTimeOfJob(){
         long total = 0;
         int num =0;
         for(String id : this.logTable.keySet()){
+            if(diffTime(id) < 0 )continue;
+            System.out.println(diffTime(id));
+            
             total += diffTime(id);
             num ++;
         }
         long avg = (long) Math.ceil(total / num);
-        String res = this.stampToData(avg);
-        return res;
+        //String res = 
+        return this.stampToData(avg);
       
     }
+
+    // public int numOfJobsByPartitions(String key){
+
+    // }
 }
