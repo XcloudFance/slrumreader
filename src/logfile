@@ -640,7 +640,7 @@
 [2022-06-03T00:24:13.797] sched: Allocate JobId=42942 NodeList=cpu14 #CPUs=16 Partition=cpu-epyc
 [2022-06-03T00:25:07.247] _job_complete: JobId=42942 WEXITSTATUS 0
 [2022-06-03T00:25:07.247] _job_complete: JobId=42942 done
-[2022-06-03T00:37:48.586] _slurm_rpc_submit_batch_job: JobId=42943 InitPrio=23206 usec=457
+[2022-06-03T00:37:48.586] _slurm_rpc_submit_batch_job: JobId=42943 uuhuhuhInitPrio=23206 usec=457
 [2022-06-03T00:37:49.459] sched: Allocate JobId=42943 NodeList=cpu14 #CPUs=48 Partition=cpu-epyc
 [2022-06-03T00:39:54.038] _job_complete: JobId=42943 OOM failure
 [2022-06-03T00:39:54.038] _job_complete: JobId=42943 done

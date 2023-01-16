@@ -8,7 +8,7 @@ public interface logReader{
     //String stampToData(String s);
     boolean ifInRange(long start, long end, long target);
     void load() throws ParseException;
-    Date getAverageTimeOfJob(); //task D
+    int getAverageTimeOfJob(); //task D
     public int[] detectInTimeRange(long start, long end) throws ParseException; //task A
     
 }
